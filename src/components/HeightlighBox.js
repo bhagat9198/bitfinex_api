@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import { tradingPairs, fundingPairs } from './../store/action';
+import { tradingPairs, fundingPairs, cryptoSelected } from './../store/action';
+import { useDispatch } from 'react-redux';
 
-export default function HeightlighBox({ crypto }) {
+export default function HeightlighBox({ crypto, setBoxRefState }) {
   let name = crypto[0];
   let volume, latestPrice, dailyChange, high, low;
+  const dispatch = useDispatch();
+  const boxRef = useRef(null);
 
   if (name[0] === 't') {
     volume = Math.round(Number(crypto[8]))
@@ -26,9 +29,31 @@ export default function HeightlighBox({ crypto }) {
   }
 
 
+  const clickHandler = () => {
+    const cryptoData = {
+      name,
+      volume,
+      latestPrice,
+      dailyChange,
+      high,
+      low,
+    }
+
+    dispatch(cryptoSelected(cryptoData));
+    console.log(boxRef.current);
+    setBoxRefState(prevRefState => {
+      if (prevRefState) {
+        prevRefState.parentElement.style.backgroundColor = 'white';
+        prevRefState.style.backgroundColor = 'white';
+      }
+      boxRef.current.parentElement.style.backgroundColor = 'gray';
+      boxRef.current.style.backgroundColor = 'gray';
+      return boxRef.current;
+    })
+  }
 
   return (
-    <Box style={{ width: '100%' }} >
+    <Box style={{ width: '100%' }} onClick={clickHandler} ref={boxRef} >
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <Typography>{name} </Typography>
         <Typography>{latestPrice}</Typography>

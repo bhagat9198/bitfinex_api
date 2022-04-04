@@ -1,9 +1,9 @@
-import { STORE_CRYPTO } from "./action";
+import { CRYPTO_SELECTED, STORE_CRYPTO } from "./action";
 
 
 const initialState = {
   cryptos: [],
-  selectedCrypto: null
+  cryptoSelected: null
 };
 
 const reducer = (state = initialState, action) => {
@@ -13,6 +13,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         cryptos: action.payload
+      }
+    case CRYPTO_SELECTED:
+      return {
+        ...state,
+        cryptoSelected: action.payload
       }
     default:
       return state;

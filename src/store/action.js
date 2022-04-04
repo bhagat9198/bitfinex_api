@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export const STORE_CRYPTO = 'STORE_CRYPTO';
+export const CRYPTO_SELECTED = 'CRYPTO_SELECTED';
 
 export const tradingPairs = ['SYMBOL', 'BID', 'BID_SIZE', 'ASK', 'ASK_SIZE', 'DAILY_CHANGE', 'DAILY_CHANGE_RELATIVE', 'LAST_PRICE', 'VOLUME', 'HIGH', 'LOW'];
 export const fundingPairs = ['FRR', 'BID', 'BID_PERIOD', 'BID_SIZE', 'ASK', 'ASK_PERIOD', 'ASK_SIZE', 'DAILY_CHANGE', 'DAILY_CHANGE_PERC', 'LAST_PRICE', 'VOLUME', 'HIGH', 'LOW', '_PLACEHOLDER', '_PLACEHOLDER', 'FRR_AMOUNT_AVAILABLE'];
@@ -54,4 +55,12 @@ export const fetchCryptos = (queryParams) => {
   }
 }
 
+export const cryptoSelected = (crypto) => {
+  return (dispatch) => {
+    dispatch({
+      type: CRYPTO_SELECTED,
+      payload: crypto
+    })
+  }
+}
 

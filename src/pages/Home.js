@@ -11,10 +11,11 @@ import { fetchCryptos, getqueryParams } from '../store/action';
 export default function Home() {
   const [value, setValue] = useState('');
   const [queryParams, setQueryParams] = useState('');
+  const [boxRefState, setBoxRefState] = useState(null);
 
   const storeState = useSelector(state => state.reducer);
   const allCryptos = storeState.cryptos;
-  // console.log('Home :: allCryptos :: ', allCryptos, storeState);
+  const selectedCryto = storeState.cryptoSelected;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -37,16 +38,53 @@ export default function Home() {
   const allCryptosUi = () => {
     if (allCryptos.length > 0) {
       return allCryptos.map(crypto => (
-        <ListItemButton component="a" href="#simple-list" style={{ width: '100%' }} >
-          <HeightlighBox crypto={crypto} />
+        <ListItemButton component="a" href={`#${crypto[0]}`} style={{ width: '100%' }} >
+          <HeightlighBox crypto={crypto} setBoxRefState={setBoxRefState} />
         </ListItemButton>
       ))
     } else {
-      return <ListItemButton component="a" href="#simple-list" style={{ width: '100%' }} >
+      return <ListItemButton component="a" href="#not-found" style={{ width: '100%' }} >
         No Cryptos Found
       </ListItemButton>
     }
   }
+
+  const selectedCryptoUI = () => {
+    if (selectedCryto) {
+      return (
+        <>
+          <Box style={{ borderBottom: '1px solid gray' }}>
+            <Typography>{selectedCryto.name}</Typography>
+            <div style={{ display: 'flex' }}>
+              <Typography>{selectedCryto.latestPrice}</Typography>
+              <Typography>{selectedCryto.dailyChange}</Typography>
+            </div>
+          </Box>
+          <Box style={{ display: 'flex' }} >
+            <div>
+              <div>HIGH</div>
+              <div>{selectedCryto.high}</div>
+            </div>
+            <div>
+              <div>LOW</div>
+              <div>{selectedCryto.low}</div>
+            </div>
+            <div>
+              <div>VOLUME</div>
+              <div>{selectedCryto.volume}</div>
+            </div>
+          </Box>
+        </>
+      )
+    } else {
+      return (
+        <Box>
+          select any crypto to see its detail.
+        </Box>
+      )
+    }
+  }
+
   return (
     <>
       <div>
@@ -68,27 +106,7 @@ export default function Home() {
             {allCryptosUi()}
           </Grid>
           <Grid item xs={12} md={9}>
-            <Box style={{ borderBottom: '1px solid gray' }}>
-              <Typography>BTC/UTC</Typography>
-              <div style={{ display: 'flex' }}>
-                <Typography>BTC/UTC</Typography>
-                <Typography>BTC/UTC</Typography>
-              </div>
-            </Box>
-            <Box style={{ display: 'flex' }} >
-              <div>
-                <div>HIGH</div>
-                <div>HIGH</div>
-              </div>
-              <div>
-                <div>LOW</div>
-                <div>LOW</div>
-              </div>
-              <div>
-                <div>VOLUME</div>
-                <div>VOLUME</div>
-              </div>
-            </Box>
+            {selectedCryptoUI()}
           </Grid>
         </Grid>
       </div>
