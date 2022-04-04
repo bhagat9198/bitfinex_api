@@ -5,11 +5,12 @@ import { BiBitcoin } from 'react-icons/bi';
 import { useSelector, useDispatch } from 'react-redux';
 import SearchBox from '../components/SearchBox';
 import HeightlighBox from '../components/HeightlighBox';
-import { fetchCryptos } from '../store/action';
+import { fetchCryptos, getqueryParams } from '../store/action';
 
 
 export default function Home() {
   const [value, setValue] = useState('');
+  const [queryParams, setQueryParams] = useState('');
 
   const storeState = useSelector(state => state.reducer);
   const allCryptos = storeState.cryptos;
@@ -17,10 +18,21 @@ export default function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setInterval(() => {
-      dispatch(fetchCryptos(value))
-    }, 5000)
+    async function getQuery() {
+      return await dispatch(getqueryParams(value));
+    }
+    getQuery().then(res => {
+      setQueryParams(res);
+    })
   }, [value])
+
+  useEffect(() => {
+    const subscriber = setInterval(() => {
+      console.log('queryParams :: ', queryParams);
+      dispatch(fetchCryptos(queryParams))
+    }, 5000)
+    return () => clearInterval(subscriber);
+  }, [queryParams])
 
   const allCryptosUi = () => {
     if (allCryptos.length > 0) {
@@ -31,7 +43,7 @@ export default function Home() {
       ))
     } else {
       return <ListItemButton component="a" href="#simple-list" style={{ width: '100%' }} >
-        'No Cryptos Found'
+        No Cryptos Found
       </ListItemButton>
     }
   }

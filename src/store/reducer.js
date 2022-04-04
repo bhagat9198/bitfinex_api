@@ -9,7 +9,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case STORE_CRYPTO:
-      console.log('reducer :: action :: ', action);
+      // console.log('reducer :: action :: ', action);
       return {
         ...state,
         cryptos: action.payload

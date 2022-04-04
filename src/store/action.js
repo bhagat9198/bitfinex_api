@@ -8,9 +8,36 @@ const baseUrl = `https://api-pub.bitfinex.com/v2`
 const pathParams = `tickers`;
 
 
-export const fetchCryptos = (query) => {
+export const getqueryParams = (query) => {
   return async (dispatch, getState) => {
-    const queryParams = "symbols=ALL" // Change based on relevant query params listed in the documentation
+    console.log('fetchCryptos :: query :: ', query);
+    let queryParams;
+    if (!query) {
+      queryParams = "symbols=ALL";
+    } else {
+      query = query.toUpperCase();
+      const allCryptos = getState().reducer.cryptos;
+      let cryptoMatch = ''
+      allCryptos.forEach(crypto => {
+        const qt = `t${query}`;
+        const qf = `f${query}`;
+        if (crypto[0].includes(qt)) {
+          cryptoMatch = cryptoMatch + crypto[0] + ','
+        } else if (crypto[0].includes(qf)) {
+          cryptoMatch = cryptoMatch + crypto[0] + ','
+        } else {
+          // no match
+        }
+      })
+      queryParams = `symbols=${cryptoMatch}`
+    }
+
+    return queryParams;
+  }
+}
+
+export const fetchCryptos = (queryParams) => {
+  return async (dispatch, getState) => {
 
     try {
       const response = await axios.get(`${baseUrl}/${pathParams}?${queryParams}`);
