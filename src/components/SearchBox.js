@@ -3,12 +3,13 @@ import { Box, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput
 import { AiOutlineSearch } from 'react-icons/ai';
 
 export default function SearchBox(props) {
-  const { type, icon } = props;
-  const [value, setValue] = useState('');
+  const { type, value, setValue } = props;
 
   const handleChange = (event) => {
-
+    // console.log('SearchBox :: handleChange :: event ::', event.target.value);
+    setValue(event.target.value);
   }
+
   return (
     <>
       <Box style={{ margin: '5px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

@@ -1,11 +1,40 @@
-import React from 'react'
-import { AppBar, Container, Grid, IconButton, ListItemButton, ListItemText, Toolbar, Typography } from '@mui/material'
-import { BiBitcoin } from 'react-icons/bi'
+import React, { useEffect, useState } from 'react'
+import { AppBar, Container, Grid, IconButton, ListItemButton, ListItemText, Toolbar, Typography } from '@mui/material';
+import { Box } from '@mui/system';
+import { BiBitcoin } from 'react-icons/bi';
+import { useSelector, useDispatch } from 'react-redux';
 import SearchBox from '../components/SearchBox';
 import HeightlighBox from '../components/HeightlighBox';
-import { Box } from '@mui/system';
+import { fetchCryptos } from '../store/action';
+
 
 export default function Home() {
+  const [value, setValue] = useState('');
+
+  const storeState = useSelector(state => state.reducer);
+  const allCryptos = storeState.cryptos;
+  // console.log('Home :: allCryptos :: ', allCryptos, storeState);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setInterval(() => {
+      dispatch(fetchCryptos(value))
+    }, 5000)
+  }, [value])
+
+  const allCryptosUi = () => {
+    if (allCryptos.length > 0) {
+      return allCryptos.map(crypto => (
+        <ListItemButton component="a" href="#simple-list" style={{ width: '100%' }} >
+          <HeightlighBox crypto={crypto} />
+        </ListItemButton>
+      ))
+    } else {
+      return <ListItemButton component="a" href="#simple-list" style={{ width: '100%' }} >
+        'No Cryptos Found'
+      </ListItemButton>
+    }
+  }
   return (
     <>
       <div>
@@ -23,13 +52,8 @@ export default function Home() {
         </Box>
         <Grid container spacing={2} style={{ minHeight: '90vh', marginTop: 1 }}>
           <Grid item xs={12} md={3} style={{ borderRight: '2px solid gray' }} >
-            <SearchBox type='text' />
-            <ListItemButton component="a" href="#simple-list" style={{ width: '100%' }} >
-              <HeightlighBox />
-            </ListItemButton>
-            <ListItemButton component="a" href="#simple-list">
-              <HeightlighBox />
-            </ListItemButton>
+            <SearchBox type='text' value={value} setValue={setValue} />
+            {allCryptosUi()}
           </Grid>
           <Grid item xs={12} md={9}>
             <Box style={{ borderBottom: '1px solid gray' }}>
