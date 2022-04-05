@@ -1,7 +1,8 @@
-import { ListItemButton } from '@mui/material'
+import { ListItemButton, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { cryptoSelected } from '../store/action';
+import EachListBtn from './EachListBtn';
 import HeightlighBox from './HeightlighBox'
 
 export default function AllCryptos() {
@@ -9,26 +10,13 @@ export default function AllCryptos() {
   const allCryptos = storeState.cryptos;
   const [selectedIndex, setSelectedIndex] = useState(null);
 
-  const dispatch = useDispatch();
   let name, volume, latestPrice, dailyChange, high, low;
 
-  const clickHandler = (index) => {
-    const cryptoData = {
-      name,
-      volume,
-      latestPrice,
-      dailyChange,
-      high,
-      low,
-    }
-
-    dispatch(cryptoSelected(cryptoData));
-    setSelectedIndex(index);
-  }
 
   if (allCryptos.length > 0) {
     return allCryptos.map((crypto, index) => {
       name = crypto[0];
+      const completeName = name;
       if (name[0] === 't') {
         volume = Math.round(Number(crypto[8]))
         latestPrice = crypto[7].toFixed(2);
@@ -46,15 +34,14 @@ export default function AllCryptos() {
       } else {
         // unexpected crypto
       }
+
       return (
-        <ListItemButton selected={selectedIndex === index} component="a" href={`#${crypto[0]}`} onClick={() => clickHandler(index)} style={{ width: '100%' }} >
-          <HeightlighBox name={name} volume={volume} latestPrice={latestPrice} dailyChange={latestPrice} />
-        </ListItemButton>
+        <EachListBtn completeName={completeName} selectedIndex={selectedIndex} index={index} name={name} volume={volume} latestPrice={latestPrice} dailyChange={dailyChange} setSelectedIndex={setSelectedIndex} high={high} low={low} />
       )
     })
   } else {
     return <ListItemButton component="a" href="#not-found" style={{ width: '100%' }} >
-      No Cryptos Found
+      <Typography variant='h6'> No Cryptos Found </Typography>
     </ListItemButton>
   }
 }
