@@ -2,7 +2,7 @@ import { CRYPTO_SELECTED, STORE_CRYPTO } from "./action";
 
 
 const initialState = {
-  cryptos: [],
+  cryptos: false,
   cryptoSelected: null
 };
 

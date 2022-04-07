@@ -1,6 +1,7 @@
 import { ListItemButton, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import EachListBtn from './EachListBtn';
 
 export default function AllCryptos() {
@@ -9,6 +10,7 @@ export default function AllCryptos() {
   const [selectedIndex, setSelectedIndex] = useState(null);
 
   let name, volume, latestPrice, dailyChange, high, low;
+
 
 
   if (allCryptos.length > 0) {
@@ -46,9 +48,11 @@ export default function AllCryptos() {
       )
     })
   } else {
+
     return (
       <ListItemButton component="div" className='cursorDefault width100' >
         <Typography variant='h6'> No Cryptos Found </Typography>
-      </ListItemButton>)
+      </ListItemButton>
+    )
   }
 }
