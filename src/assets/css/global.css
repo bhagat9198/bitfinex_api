@@ -1,0 +1,65 @@
+/* global */
+.flex {
+  display: flex;
+}
+
+.alignCenter {
+  align-items: center;
+}
+
+.justifyCenter {
+  justify-content: center;
+}
+
+.justifySpaceBetween {
+  justify-content: space-between;
+}
+
+.borderGrayBottom { 
+  border-bottom: 2px solid gray;
+}
+
+.borderGrayRight { 
+  border-right: 2px solid gray;
+}
+
+.marginTop1 {
+  margin-top: 1px;
+}
+
+.width100 {
+  width: 100%;
+}
+
+.cursorDefault {
+  cursor: default;
+}
+
+
+
+/*  home.js */
+.appBar { 
+  background-color: white !important;
+  color: black !important;
+}
+
+.displayCryptos {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+
+/* scrollbar */
+
+body::-webkit-scrollbar {
+  width: 1em;
+}
+ 
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}

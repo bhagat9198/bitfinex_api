@@ -14,12 +14,12 @@ export default function HeightlighBox({ name, volume, latestPrice, dailyChange }
   }
 
   return (
-    <Box style={{ width: '100%' }} >
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <Box className='width100' >
+      <div className='flex justifySpaceBetween'>
         <Typography>{name} </Typography>
         <Typography>$ {latestPrice}</Typography>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <div className='flex justifySpaceBetween'>
         <Typography color='gray'>Vol : {volume}</Typography>
         {dailyChangeUI}
       </div>

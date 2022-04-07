@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Box, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput } from '@mui/material'
 import { AiOutlineSearch } from 'react-icons/ai';
 
@@ -12,7 +12,7 @@ export default function SearchBox(props) {
 
   return (
     <>
-      <Box style={{ margin: '5px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Box sx={{ margin: 1 }} className='flex alignCenter justifyCenter'>
         <FormControl style={{ width: '95%' }} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-password">Search</InputLabel>
           <OutlinedInput

@@ -18,11 +18,11 @@ export default function CryptoSelected() {
 
     return (
       <>
-        <Box style={{ borderBottom: '1px solid gray' }}>
+        <Box className='borderGrayBottom' >
           <div style={{ display: 'flex' }}>
             <div>
               <Typography variant='h4' gutterBottom={true}>{selectedCryto.name}</Typography>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <div className='flex justifySpaceBetween'>
                 <Typography variant='subtitle1' >${selectedCryto.latestPrice}</Typography>
                 {dailyChangeUI}
               </div>
@@ -50,7 +50,7 @@ export default function CryptoSelected() {
     )
   } else {
     return (
-      <Box style={{ display: 'flex', justifyContent: 'center' }}>
+      <Box className='flex justifyCenter'>
         <Typography variant='h5'>
           Select any crypto to see its detail.
         </Typography>

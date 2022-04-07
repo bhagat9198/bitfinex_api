@@ -17,14 +17,19 @@ export default function EachListBtn(props) {
       high,
       low,
     }
-    // console.log('EachListBtn :: cryptoData :: ', cryptoData);
     dispatch(cryptoSelected(cryptoData));
     setSelectedIndex(index);
   }
 
 
   return (
-    <ListItemButton key={completeName} selected={selectedIndex === index} component="a" href={`#${crypto[0]}`} onClick={() => clickHandler({ index, name, volume, latestPrice, dailyChange, high, low })} style={{ width: '100%' }} >
+    <ListItemButton key={completeName}
+      selected={selectedIndex === index}
+      component="a"
+      href={`#${name}`}
+      onClick={() => clickHandler({ index, name, volume, latestPrice, dailyChange, high, low })}
+      style={{ width: '100%' }}
+    >
       <HeightlighBox name={name} volume={volume} latestPrice={latestPrice} dailyChange={dailyChange} />
     </ListItemButton>
   )

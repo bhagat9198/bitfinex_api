@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { AppBar, Container, Grid, IconButton, ListItemButton, ListItemText, Toolbar, Typography } from '@mui/material';
+import { AppBar, Container, Grid, IconButton, Toolbar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { BiBitcoin } from 'react-icons/bi';
 import { useSelector, useDispatch } from 'react-redux';
@@ -14,9 +14,6 @@ export default function Home() {
   const [value, setValue] = useState('');
   const [queryParams, setQueryParams] = useState('');
 
-  const storeState = useSelector(state => state.reducer);
-  const allCryptos = storeState.cryptos;
-  const selectedCryto = storeState.cryptoSelected;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -38,9 +35,9 @@ export default function Home() {
 
   return (
     <>
-      <div>
-        <Box style={{ borderBottom: '2px solid gray' }}>
-          <AppBar position="static" style={{ backgroundColor: 'white', color: 'black' }}>
+      <div  >
+        <Box className="borderGrayBottom">
+          <AppBar position="static" className='appBar'>
             <Toolbar >
               <IconButton edge="start" aria-label="menu" sx={{ mr: 2 }}>
                 <BiBitcoin />
@@ -51,8 +48,8 @@ export default function Home() {
             </Toolbar>
           </AppBar>
         </Box>
-        <Grid container spacing={2} style={{ minHeight: '90vh', marginTop: 1 }}>
-          <Grid item xs={12} md={3} style={{ borderRight: '2px solid gray' }} >
+        <Grid container spacing={2} style={{ marginTop: 1, height: '90vh' }}>
+          <Grid item xs={12} md={3} className='borderGrayRight displayCryptos' >
             <SearchBox type='text' value={value} setValue={setValue} />
             <AllCryptos />
           </Grid>
