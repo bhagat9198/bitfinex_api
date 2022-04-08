@@ -1,7 +1,6 @@
 import { ListItemButton, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
 import EachListBtn from './EachListBtn';
 
 export default function AllCryptos() {

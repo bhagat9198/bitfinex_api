@@ -14,6 +14,7 @@ export default function InfoCard(props) {
                 {heading}
               </Typography>
               <Divider />
+              <br />
               <Typography variant="body2" color="text.secondary">
                 {children}
               </Typography>

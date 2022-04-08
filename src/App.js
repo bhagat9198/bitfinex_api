@@ -1,17 +1,17 @@
-import Home from "./pages/Home";
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import { Route, Routes } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css';
 import './assets/css/global.css';
-import { useSelector } from "react-redux";
-import { Route, Routes } from 'react-router-dom'
+
 import Docs from "./pages/Docs";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <>
       <ToastContainer
-        position="top-right"
-        autoClose={3000}
+        position="bottom-right"
+        autoClose={2000}
         hideProgressBar={false}
         newestOnTop={true}
         closeOnClick

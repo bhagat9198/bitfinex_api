@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { AppBar, Container, Grid, IconButton, Toolbar, Typography } from '@mui/material';
+import { Grid } from '@mui/material';
 import { Box } from '@mui/system';
 import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+
 import SearchBox from '../components/SearchBox';
-import HeightlighBox from '../components/HeightlighBox';
 import { fetchCryptos, getqueryParams } from '../store/action';
 import AllCryptos from '../components/AllCryptos';
 import CryptoSelected from '../components/CryptoSelected';
 import Header from '../components/Header';
-import { toast } from 'react-toastify';
 
 
 export default function Home() {
