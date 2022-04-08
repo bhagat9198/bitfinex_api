@@ -1,7 +1,7 @@
 import React from 'react'
 import { AppBar, Button, IconButton, Toolbar, Typography } from '@mui/material'
 import { BiBitcoin } from 'react-icons/bi';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 
 export default function Header() {
