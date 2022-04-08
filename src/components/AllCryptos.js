@@ -11,8 +11,6 @@ export default function AllCryptos() {
 
   let name, volume, latestPrice, dailyChange, high, low;
 
-
-
   if (allCryptos.length > 0) {
     return allCryptos.map((crypto, index) => {
       name = crypto[0];
