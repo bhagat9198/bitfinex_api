@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { AppBar, Container, Grid, IconButton, Toolbar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import { BiBitcoin } from 'react-icons/bi';
 import { useSelector, useDispatch } from 'react-redux';
 import SearchBox from '../components/SearchBox';
 import HeightlighBox from '../components/HeightlighBox';
 import { fetchCryptos, getqueryParams } from '../store/action';
 import AllCryptos from '../components/AllCryptos';
 import CryptoSelected from '../components/CryptoSelected';
+import Header from '../components/Header';
 
 
 export default function Home() {
+  console.log('Home');
   const [value, setValue] = useState('');
   const [queryParams, setQueryParams] = useState('');
 
@@ -35,29 +36,18 @@ export default function Home() {
 
   return (
     <>
-      <div  >
-        <Box className="borderGrayBottom">
-          <AppBar position="static" className='appBar'>
-            <Toolbar >
-              <IconButton edge="start" aria-label="menu" sx={{ mr: 2 }}>
-                <BiBitcoin />
-              </IconButton>
-              <Typography variant="h6" component="div">
-                Bitfinex API
-              </Typography>
-            </Toolbar>
-          </AppBar>
-        </Box>
-        <Grid container spacing={2} style={{ marginTop: 1, height: '90vh' }}>
-          <Grid item xs={12} md={3} className='borderGrayRight displayCryptos' >
-            <SearchBox type='text' value={value} setValue={setValue} />
-            <AllCryptos />
-          </Grid>
-          <Grid item xs={12} md={9}>
-            <CryptoSelected />
-          </Grid>
+      <Box className="borderGrayBottom">
+        <Header />
+      </Box>
+      <Grid container spacing={2} style={{ marginTop: 1, height: '90vh' }}>
+        <Grid item xs={12} md={3} className='borderGrayRight displayCryptos' >
+          <SearchBox type='text' value={value} setValue={setValue} />
+          <AllCryptos />
         </Grid>
-      </div>
+        <Grid item xs={12} md={9}>
+          <CryptoSelected />
+        </Grid>
+      </Grid>
     </>
   )
 }
