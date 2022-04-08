@@ -7,19 +7,6 @@ import { Route, Routes } from 'react-router-dom'
 import Docs from "./pages/Docs";
 
 function App() {
-  const storeState = useSelector(state => state.reducer);
-  const allCryptos = storeState.cryptos;
-
-  if (!allCryptos) {
-    toast.warning("Please Wait. Fetching Cryptos.")
-  }
-  if (allCryptos && allCryptos.length === 0) {
-    toast.error("Please try with differnt search.")
-  }
-  // if (allCryptos && allCryptos.length > 0) {
-  //   toast.success("Cryptos found")
-  // }
-
   return (
     <>
       <ToastContainer

@@ -8,13 +8,15 @@ import { fetchCryptos, getqueryParams } from '../store/action';
 import AllCryptos from '../components/AllCryptos';
 import CryptoSelected from '../components/CryptoSelected';
 import Header from '../components/Header';
+import { toast } from 'react-toastify';
 
 
 export default function Home() {
   console.log('Home');
   const [value, setValue] = useState('');
   const [queryParams, setQueryParams] = useState('');
-
+  const storeState = useSelector(state => state.reducer);
+  const allCryptos = storeState.cryptos;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,19 +29,36 @@ export default function Home() {
   }, [value])
 
   useEffect(() => {
-    const subscriber = setInterval(() => {
-      console.log('queryParams :: ', queryParams);
-      dispatch(fetchCryptos(queryParams))
+    const subscriber = setInterval(async () => {
+      // console.log('Home :: queryParams :: ', queryParams);
+      const res = await dispatch(fetchCryptos(queryParams))
+      console.log('Home :: res :: ', res);
+      if (!res.status) {
+        console.log('Home :: res :: ', res);
+        toast.error(res.message)
+      }
     }, 5000)
     return () => clearInterval(subscriber);
   }, [queryParams])
+
+  useEffect(() => {
+    if (!allCryptos) {
+      toast.warning("Please Wait. Fetching Cryptos.")
+    }
+  }, [])
+
+  useEffect(() => {
+    if (allCryptos && allCryptos.length === 0) {
+      toast.error("Please try with differnt search.")
+    }
+  }, [allCryptos])
 
   return (
     <>
       <Box className="borderGrayBottom">
         <Header />
       </Box>
-      <Grid container spacing={2} style={{ marginTop: 1, height: '90vh' }}>
+      <Grid container spacing={2} style={{ marginTop: 1, height: '88vh' }} className="borderGrayBottom">
         <Grid item xs={12} md={3} className='borderGrayRight displayCryptos' >
           <SearchBox type='text' value={value} setValue={setValue} />
           <AllCryptos />

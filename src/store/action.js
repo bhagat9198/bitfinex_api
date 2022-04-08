@@ -49,9 +49,17 @@ export const fetchCryptos = (queryParams) => {
         type: STORE_CRYPTO,
         payload: data
       })
+      return {
+        status: true,
+        message: 'Fetched Successfully'
+      }
     } catch (error) {
       console.log(error);
       const errMsg = error.message;
+      return {
+        status: false,
+        message: errMsg
+      }
     }
   }
 }
